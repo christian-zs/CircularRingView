@@ -15,7 +15,10 @@ import android.view.View;
 
 import com.example.zs.circularringview.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 
 /**
@@ -138,6 +141,33 @@ public class CircularRingView extends View {
 
         // 用于定义的圆弧的形状和大小的界限
         oval = new RectF();
+
+    }
+
+    /**
+     * 设置中心日期显示
+     *
+     * @param date 中心日期
+     */
+    public void setCenterDate(Date date) {
+        SimpleDateFormat dd = new SimpleDateFormat("dd", Locale.getDefault());
+        this.date = dd.format(date);
+        SimpleDateFormat yyyyMMdd = new SimpleDateFormat("yyyy-MM", Locale.getDefault());
+        yearsMonth = yyyyMMdd.format(date);
+        postInvalidate();
+    }
+
+    /**
+     * 设置考勤打卡记录
+     *
+     * @param signDateRecords 中心日期
+     */
+    public void setSignDateRecords(ArrayList<Float> signDateRecords) {
+        if (signDateRecords != null && signDateRecords.size() > 0) {
+            this.signDateRecords.clear();
+            this.signDateRecords.addAll(signDateRecords);
+            postInvalidate();
+        }
     }
 
 
@@ -196,11 +226,12 @@ public class CircularRingView extends View {
             paint.setStrokeWidth(insideCircleWidth);
             paint.setColor(insideRoundBackgroundColor);
             canvas.drawArc(oval, -90, 360, true, paint);
-        }
 
-        // TODO 考勤打卡标记
-        paint.setColor(Color.WHITE);
-        canvas.drawArc(oval, 90, (float) 2.5, false, paint);
+            for (int i = 0; i < signDateRecords.size(); i++) {
+                paint.setColor(Color.WHITE);
+                canvas.drawArc(oval, signDateRecords.get(i), (float) 2.5, false, paint);
+            }
+        }
 
         // 是否显示刻度
         if (isShowScale) {

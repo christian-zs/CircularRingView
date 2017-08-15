@@ -7,7 +7,7 @@
     tools:context="com.example.zs.circularringview.MainActivity">
 
     <com.example.zs.circularringview.view.CircularRingView
-        android:id="@+id/progress"
+        android:id="@+id/view"
         android:layout_width="200dp"
         android:layout_height="200dp"
         app:centerTextSize="22sp"
