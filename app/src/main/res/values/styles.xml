@@ -17,6 +17,7 @@
         <attr name="circleScaleTextSize" format="dimension" />
         <attr name="circleScaleColor" format="color" />
         <attr name="centerTextSize" format="dimension" />
+        <attr name="centerYearMonthTextSize" format="dimension" />
         <attr name="centerTextColor" format="color" />
     </declare-styleable>
 

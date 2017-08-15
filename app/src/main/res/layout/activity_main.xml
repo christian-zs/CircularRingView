@@ -8,8 +8,11 @@
 
     <com.example.zs.circularringview.view.CircularRingView
         android:id="@+id/progress"
-        android:layout_width="320dp"
-        android:layout_height="320dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:centerTextSize="22sp"
+        app:centerYearMonthTextSize="12sp"
+        app:circleScaleTextSize="12sp"
         app:isShowScale="true" />
 
 </RelativeLayout>

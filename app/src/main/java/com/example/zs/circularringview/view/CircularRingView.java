@@ -15,6 +15,8 @@ import android.view.View;
 
 import com.example.zs.circularringview.R;
 
+import java.util.ArrayList;
+
 
 /**
  * Description:自定义圆环view
@@ -41,6 +43,8 @@ public class CircularRingView extends View {
     private int circleScaleColor;
     // 圆环内部字体大小
     private float centerTextSize;
+    // 圆环内部年月字体大小
+    private float centerTextYearMonthSize;
     // 圆环内部字体颜色
     private int centerTextColor;
     // 是否显示刻度
@@ -57,6 +61,12 @@ public class CircularRingView extends View {
     private Paint paint;
     // 刻度线长度
     private int scaleLineWidth;
+    // 中心日期显示
+    private String date = "7";
+    // 中心年月
+    private String yearsMonth = "2017-07";
+    // 打卡时间记录
+    private ArrayList<Float> signDateRecords = new ArrayList<>();
     // 时间刻度与圆环间距
     private static final int CIRCLE_ROUND_SCALE_INTERVAL = 20;
 
@@ -78,11 +88,13 @@ public class CircularRingView extends View {
                 ContextCompat.getColor(context, R.color.inside_circular_background));
         circleScaleTextColor = mTypedArray.getColor(R.styleable.CircularRing_circleScaleTextColor,
                 ContextCompat.getColor(context, R.color.circle_scale_text));
-        circleScaleTextSize = mTypedArray.getDimensionPixelOffset(R.styleable.CircularRing_circleScaleTextSize,
-                getDpValue(16));
+        circleScaleTextSize = mTypedArray.getDimensionPixelOffset(
+                R.styleable.CircularRing_circleScaleTextSize, getDpValue(16));
         circleScaleColor = mTypedArray.getColor(R.styleable.CircularRing_circleScaleColor,
                 ContextCompat.getColor(context, R.color.circular_background));
         centerTextSize = mTypedArray.getDimension(R.styleable.CircularRing_centerTextSize, getDpValue(8));
+        centerTextYearMonthSize = mTypedArray.getDimension(
+                R.styleable.CircularRing_centerYearMonthTextSize, getDpValue(8));
         centerTextColor = mTypedArray.getColor(R.styleable.CircularRing_circleScaleColor,
                 ContextCompat.getColor(context, R.color.circle_scale_text));
         isShowScale = mTypedArray.getBoolean(R.styleable.CircularRing_isShowScale, true);
@@ -98,11 +110,13 @@ public class CircularRingView extends View {
         centerPaintText.setColor(centerTextColor);
         centerPaintText.setTextAlign(Paint.Align.CENTER);
         centerPaintText.setTextSize(centerTextSize);
+        centerPaintText.setStyle(Paint.Style.FILL);
+        centerPaintText.setTextAlign(Paint.Align.CENTER);
         centerPaintText.setAntiAlias(true);
 
         // 刻度
         scalePaint = new Paint();
-        scalePaint.setColor(circleScaleColor);
+        scalePaint.setColor(Color.WHITE);
         scalePaint.setStyle(Paint.Style.STROKE);
         scalePaint.setAntiAlias(true);
         scalePaint.setStrokeWidth(5);
@@ -150,17 +164,18 @@ public class CircularRingView extends View {
         circleCenter = getMeasuredWidth() / 2;
         // 圆环半径
         Rect bounds = new Rect();
-        scalePaintText.getTextBounds(getContext().getString(R.string.twelve_time), 0,
-                getContext().getString(R.string.twelve_time).length(), bounds);
+        scalePaintText.getTextBounds(getContext().getString(R.string.zero_time), 0,
+                getContext().getString(R.string.zero_time).length(), bounds);
 
         if (isShowScale) {
-            circleRoundRadio = (getMeasuredWidth() - bounds.height() * 2 - CIRCLE_ROUND_SCALE_INTERVAL * 2) / 4;
+            circleRoundRadio = (getMeasuredWidth() - bounds.height() * 2
+                    - CIRCLE_ROUND_SCALE_INTERVAL * 2) / 4;
         } else {
             circleRoundRadio = circleCenter / 2;
         }
 
         // 圆环宽度
-        circleRoundWidth = circleRoundRadio;
+        circleRoundWidth = circleRoundRadio / 5 * 3;
         // 刻度线长度
         scaleLineWidth = circleRoundWidth / 5;
 
@@ -175,10 +190,13 @@ public class CircularRingView extends View {
         canvas.drawArc(oval, -90, 360, false, paint);
 
         // 内部圆环宽度
-        int insideCircleWidth = circleRoundWidth / 5 * 4;
-        paint.setStrokeWidth(insideCircleWidth);
-        paint.setColor(insideRoundBackgroundColor);
-        canvas.drawArc(oval, -90, 360, true, paint);
+        // 检测是否有打卡记录
+        if (signDateRecords != null && signDateRecords.size() > 0) {
+            int insideCircleWidth = circleRoundWidth / 5 * 4;
+            paint.setStrokeWidth(insideCircleWidth);
+            paint.setColor(insideRoundBackgroundColor);
+            canvas.drawArc(oval, -90, 360, true, paint);
+        }
 
         // TODO 考勤打卡标记
         paint.setColor(Color.WHITE);
@@ -217,8 +235,25 @@ public class CircularRingView extends View {
             scalePaintText.getTextBounds(eighteen, 0, eighteen.length(), bounds);
             canvas.drawText(eighteen, circleCenter - circleRoundRadio - circleRoundWidth / 2 - CIRCLE_ROUND_SCALE_INTERVAL - bounds.width() / 2,
                     circleCenter + bounds.height() / 2, scalePaintText);
+        }
+
+        // 绘制中心日期
+        if (isShowScale) {
+            centerPaintText.getTextBounds(date, 0, date.length(), bounds);
+            canvas.drawText(date, circleCenter,
+                    circleCenter, centerPaintText);
+
+            centerPaintText.setTextSize(centerTextYearMonthSize);
+            centerPaintText.setColor(ContextCompat.getColor(getContext(), R.color.circle_year_month_text));
+            centerPaintText.getTextBounds(yearsMonth, 0, yearsMonth.length(), bounds);
+            canvas.drawText(yearsMonth, circleCenter,
+                    circleCenter + bounds.height() + CIRCLE_ROUND_SCALE_INTERVAL, centerPaintText);
 
 
+        } else {
+            centerPaintText.getTextBounds(date, 0, date.length(), bounds);
+            canvas.drawText(date, circleCenter,
+                    circleCenter + bounds.height() / 2, centerPaintText);
         }
 
     }
