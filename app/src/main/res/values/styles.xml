@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <declare-styleable name="CircularRing">
+        <attr name="roundColor" format="color" />
+        <attr name="insideRoundColor" format="color" />
+        <attr name="isShowScale" format="boolean" />
+        <attr name="circleRadius" format="dimension" />
+        <attr name="circleScaleTextColor" format="color" />
+        <attr name="circleScaleTextSize" format="dimension" />
+        <attr name="circleScaleColor" format="color" />
+        <attr name="centerTextSize" format="dimension" />
+        <attr name="centerTextColor" format="color" />
+    </declare-styleable>
+
 </resources>

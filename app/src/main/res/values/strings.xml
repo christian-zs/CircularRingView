@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CircularRingView</string>
+    <string name="zero_time">0点</string>
+    <string name="six_time">6点</string>
+    <string name="twelve_time">12点</string>
+    <string name="eighteen_time">18点</string>
 </resources>
