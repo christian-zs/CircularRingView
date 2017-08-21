@@ -7,13 +7,13 @@
 
     <com.example.zs.library.CircularRingView
         android:id="@+id/view"
-        android:layout_gravity="center"
         android:layout_width="300dp"
         android:layout_height="300dp"
+        android:layout_gravity="center"
         app:centerTextSize="14sp"
         app:centerYearMonthTextSize="12sp"
         app:circleScaleTextSize="12sp"
-        app:isShowScale="false" />
+        app:isShowScale="true" />
 
     <Button
         android:id="@+id/calendar_view"
@@ -23,8 +23,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/calendar_view"
         android:background="@color/colorPrimaryDark"
+        android:text="@string/calendar_view"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold" />
