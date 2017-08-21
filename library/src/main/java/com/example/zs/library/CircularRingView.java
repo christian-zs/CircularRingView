@@ -219,8 +219,7 @@ public class CircularRingView extends View {
                 getContext().getString(R.string.zero_time).length(), bounds);
 
         if (isShowScale) {
-            circleRoundRadio = (getMeasuredWidth() - bounds.height() * 2
-                    - CIRCLE_ROUND_SCALE_INTERVAL * 2) / 4;
+            circleRoundRadio = (getMeasuredWidth() - bounds.height() * 2) / 4;
         } else {
             circleRoundRadio = circleCenter / 2;
         }

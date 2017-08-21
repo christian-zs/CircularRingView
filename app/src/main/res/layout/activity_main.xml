@@ -10,8 +10,8 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_gravity="center"
-        app:centerTextSize="16sp"
-        app:centerYearMonthTextSize="14sp"
+        app:centerTextSize="18sp"
+        app:centerYearMonthTextSize="12sp"
         app:circleScaleTextSize="12sp"
         app:isShowScale="true" />
 
