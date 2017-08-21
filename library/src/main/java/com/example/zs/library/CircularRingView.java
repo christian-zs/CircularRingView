@@ -243,7 +243,7 @@ public class CircularRingView extends View {
         // 圆心
         Paint paintCenter = new Paint();
         paintCenter.setColor(centerColor);
-        canvas.drawCircle(circleCenter, circleCenter, circleRoundRadio, paintCenter);
+        canvas.drawCircle(circleCenter, circleCenter, circleRoundWidth, paintCenter);
 
         // 内部圆环宽度
         // 检测是否有打卡记录
