@@ -226,7 +226,7 @@ public class CircularRingView extends View {
         }
 
         // 圆环宽度
-        circleRoundWidth = circleRoundRadio / 5 * 3;
+        circleRoundWidth = circleRoundRadio / 7 * 4;
         // 刻度线长度
         scaleLineWidth = circleRoundWidth / 5;
 
