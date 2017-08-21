@@ -32,16 +32,20 @@ public class CalendarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         ButterKnife.bind(this);
-        getWeek(new Date(System.currentTimeMillis()));
+//        getWeek(new Date(System.currentTimeMillis()));
 
         CalendarAdapter adapter = new CalendarAdapter();
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 7, OrientationHelper.VERTICAL, false);
         mList.setLayoutManager(mLayoutManager);
         mList.setAdapter(adapter);
+        adapter.setWeekStartIndex(getWeekStartIndex(getDate().get(0)));
         adapter.setData(getDate());
 
     }
 
+    /**
+     * 获取模拟时间
+     */
     private ArrayList<Date> getDate() {
         ArrayList<Date> date = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
@@ -51,6 +55,12 @@ public class CalendarActivity extends AppCompatActivity {
         return date;
     }
 
+    /**
+     * 日期转换
+     *
+     * @param str 自定时间格式字符串
+     * @return date
+     */
     public static Date StringToYMDDate(String str) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         Date date = null;
@@ -62,15 +72,15 @@ public class CalendarActivity extends AppCompatActivity {
         return date;
     }
 
-
-    public static String getWeek(Date date) {
-        String[] weeks = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+    /**
+     * 获取指定日期为周几
+     *
+     * @param date 日期
+     * @return 周几位置
+     */
+    public static int getWeekStartIndex(Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        int week_index = cal.get(Calendar.DAY_OF_WEEK) - 1;
-        if (week_index < 0) {
-            week_index = 0;
-        }
-        return weeks[week_index];
+        return cal.get(Calendar.DAY_OF_WEEK) - 1;
     }
 }

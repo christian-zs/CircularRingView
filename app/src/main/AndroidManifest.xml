@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CalendarActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,7 @@
         </activity>
         <!--考勤统计页面-->
         <activity
-            android:name=".MainActivity"
+            android:name=".CalendarActivity"
             android:alwaysRetainTaskState="true"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait"

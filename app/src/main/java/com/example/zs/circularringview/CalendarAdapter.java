@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.zs.circularringview.view.CircularRingView;
+import com.example.zs.library.CircularRingView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,11 +25,13 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
     private ArrayList<Date> mData = new ArrayList<>();
     private Context mContext;
+    private int mWeekStarIndex = 0;
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mData.size() + mWeekStarIndex;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext = parent.getContext();
@@ -56,16 +58,30 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.circularRingView.setCenterDate(mData.get(position));
-        holder.circularRingView.setSignDateRecords(getSignRecord());
+        if (position < mWeekStarIndex) {
+            holder.itemView.setVisibility(View.GONE);
+        } else {
+            holder.itemView.setVisibility(View.VISIBLE);
+            holder.circularRingView.setCenterDate(mData.get(position - mWeekStarIndex));
+            holder.circularRingView.setSignDateRecords(getSignRecord());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                holder.circularRingView.setCenterColor(ContextCompat.getColor(mContext, R.color.inside_circular_background1));
-                holder.circularRingView.setCenterTextColor(Color.WHITE);
-            }
-        });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    holder.circularRingView.setCenterColor(ContextCompat.getColor(mContext, R.color.inside_circular_background1));
+                    holder.circularRingView.setCenterTextColor(Color.WHITE);
+                }
+            });
+        }
+    }
+
+    /**
+     * 设置开始日期为周几
+     *
+     * @param index 这周开始位置
+     */
+    public void setWeekStartIndex(int index) {
+        mWeekStarIndex = index;
     }
 
 
@@ -94,13 +110,8 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
         this.mOnItemClickListener = onItemClickListener;
     }
 
-    /**
-     * 打开详情监听
-     */
     public interface OnItemClickListener {
 
-        void onItemClick(String id);
-
+        void onItemClick(int position);
     }
-
 }
