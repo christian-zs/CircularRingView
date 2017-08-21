@@ -17,8 +17,9 @@ A simple ring control that shows the current date in part of the ring, but the r
 Add below dependency in your build.gradle file.  
 	
     dependencies {
-	            compile 'com.github.christian-zs:CircularRingView:-SNAPSHOT'
-    } 
+        compile 'com.github.christian-zs:CircularRingView:v1.0'
+    }
+
 
 ### Step 2
 Use the CircularRingView in layout file, you can add customized attributes here.
