@@ -5,7 +5,10 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="circular_background">#EEEEEE</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="windowBackgroundGrey">#EEEEEE</color>
     <color name="inside_circular_background">#35C2F0</color>
+    <color name="inside_circular_background1">#ffbe30</color>
     <color name="circle_scale_text">#333333</color>
     <color name="circle_year_month_text">#999999</color>
 

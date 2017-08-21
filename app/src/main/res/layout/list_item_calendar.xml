@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="50dp"
     tools:context="com.example.zs.circularringview.MainActivity">
 
     <com.example.zs.circularringview.view.CircularRingView
         android:id="@+id/view"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:centerTextSize="14sp"
         app:centerYearMonthTextSize="12sp"
         app:circleScaleTextSize="12sp"

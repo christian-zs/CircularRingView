@@ -50,6 +50,8 @@ public class CircularRingView extends View {
     private float centerTextYearMonthSize;
     // 圆环内部字体颜色
     private int centerTextColor;
+    // 圆心背景颜色
+    private int centerColor;
     // 是否显示刻度
     private boolean isShowScale;
     // 椭圆
@@ -101,6 +103,7 @@ public class CircularRingView extends View {
         centerTextColor = mTypedArray.getColor(R.styleable.CircularRing_circleScaleColor,
                 ContextCompat.getColor(context, R.color.circle_scale_text));
         isShowScale = mTypedArray.getBoolean(R.styleable.CircularRing_isShowScale, true);
+        centerColor = Color.WHITE;
 
         initView();
         mTypedArray.recycle();
@@ -170,6 +173,26 @@ public class CircularRingView extends View {
         }
     }
 
+    /**
+     * 设置圆心字体颜色
+     *
+     * @param color 颜色
+     */
+    public void setCenterTextColor(int color) {
+        centerPaintText.setColor(color);
+        postInvalidate();
+    }
+
+    /**
+     * 设置圆心背景颜色
+     *
+     * @param color 颜色
+     */
+    public void setCenterColor(int color) {
+        centerColor = color;
+        postInvalidate();
+    }
+
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -218,6 +241,11 @@ public class CircularRingView extends View {
         paint.setColor(roundBackgroundColor);
         paint.setStrokeWidth(circleRoundWidth);
         canvas.drawArc(oval, -90, 360, false, paint);
+
+        // 圆心
+        Paint paintCenter = new Paint();
+        paintCenter.setColor(centerColor);
+        canvas.drawCircle(circleCenter, circleCenter, circleRoundRadio, paintCenter);
 
         // 内部圆环宽度
         // 检测是否有打卡记录
