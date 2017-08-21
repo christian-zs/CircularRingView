@@ -6,9 +6,9 @@
 ### 圆环控件
 
 
-![image](https://github.com/christian-zs/CircularRingView/blob/master/app/src/main/res/drawable/ciricualarRingView.png) 
+![image](https://github.com/christian-zs/CircularRingView/blob/master/app/src/main/res/drawable/ciricualar_view.png) 
 
 ### 日历控件
 
 
-![image](https://github.com/christian-zs/CircularRingView/blob/master/app/src/main/res/drawable/calendarView.png) 
+![image](https://github.com/christian-zs/CircularRingView/blob/master/app/src/main/res/drawable/calendar_view.png) 
