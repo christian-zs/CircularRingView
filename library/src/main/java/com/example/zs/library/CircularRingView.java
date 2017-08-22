@@ -292,7 +292,7 @@ public class CircularRingView extends View {
             // 有刻度显示 圆心内部绘制阴影效果
             Paint paintCenter = new Paint();
             paintCenter.setColor(centerColor);
-            canvas.drawCircle(circleCenter, circleCenter, circleRoundWidth, paintCenter);
+            canvas.drawCircle(circleCenter, circleCenter,  circleRoundRadio - circleRoundWidth / 2, paintCenter);
         } else {
             // 无刻度显示 圆心内部实心显示
             Paint paintCenter = new Paint();
