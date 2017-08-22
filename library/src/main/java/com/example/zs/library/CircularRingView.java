@@ -177,6 +177,7 @@ public class CircularRingView extends View {
      * @param color 颜色
      */
     public void setCenterTextColor(int color) {
+        centerTextColor = color;
         centerPaintText.setColor(color);
         postInvalidate();
     }
@@ -250,7 +251,7 @@ public class CircularRingView extends View {
 
             for (int i = 0; i < signDateRecords.size(); i++) {
                 paint.setColor(Color.WHITE);
-                canvas.drawArc(oval, signDateRecords.get(i), (float) 2.5, false, paint);
+                canvas.drawArc(oval, signDateRecords.get(i) - 90, (float) 2.5, false, paint);
             }
         }
 
@@ -301,6 +302,8 @@ public class CircularRingView extends View {
 
         // 绘制中心日期
         if (isShowScale) {
+            centerPaintText.setTextSize(centerTextSize);
+            centerPaintText.setColor(centerTextColor);
             centerPaintText.getTextBounds(date, 0, date.length(), bounds);
             canvas.drawText(date, circleCenter,
                     circleCenter, centerPaintText);
