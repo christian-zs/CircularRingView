@@ -239,10 +239,6 @@ public class CircularRingView extends View {
         paint.setStrokeWidth(circleRoundWidth);
         canvas.drawArc(oval, -90, 360, false, paint);
 
-        // 圆心
-        Paint paintCenter = new Paint();
-        paintCenter.setColor(centerColor);
-        canvas.drawCircle(circleCenter, circleCenter, circleRoundWidth, paintCenter);
 
         // 内部圆环宽度
         // 检测是否有打卡记录
@@ -291,6 +287,16 @@ public class CircularRingView extends View {
             scalePaintText.getTextBounds(eighteen, 0, eighteen.length(), bounds);
             canvas.drawText(eighteen, circleCenter - circleRoundRadio - circleRoundWidth / 2 - CIRCLE_ROUND_SCALE_INTERVAL - bounds.width() / 2,
                     circleCenter + bounds.height() / 2, scalePaintText);
+
+            // 有刻度显示 圆心内部绘制阴影效果
+            Paint paintCenter = new Paint();
+            paintCenter.setColor(centerColor);
+            canvas.drawCircle(circleCenter, circleCenter, circleRoundWidth, paintCenter);
+        } else {
+            // 无刻度显示 圆心内部实心显示
+            Paint paintCenter = new Paint();
+            paintCenter.setColor(centerColor);
+            canvas.drawCircle(circleCenter, circleCenter, circleRoundRadio - circleRoundWidth / 2, paintCenter);
         }
 
         // 绘制中心日期
